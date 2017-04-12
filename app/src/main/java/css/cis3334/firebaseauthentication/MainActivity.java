@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 firebaseAuthWithGoogle(account);
             } else {
                 // Google Sign In failed, update UI appropriately
-                // ...
+                // ... 
             }
         }
     }
