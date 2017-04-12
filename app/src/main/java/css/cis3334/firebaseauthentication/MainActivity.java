@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, R.string.auth_failed,
+                            Toast.makeText(MainActivity.this, "FAIL",
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w("CIS3334", "signInWithEmail:failed", task.getException());
-                            Toast.makeText(MainActivity.this, R.string.auth_failed,
+                            Toast.makeText(MainActivity.this, "FAIL",
                                     Toast.LENGTH_SHORT).show();
                         }
 
