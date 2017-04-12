@@ -125,12 +125,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         });
 
-        buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Log.d("CIS3334", "Google login ");
-                googleSignIn();
-            }
-        });
+//        buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Log.d("CIS3334", "Google login ");
+//                googleSignIn();
+//            }
+//        });
 
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -139,20 +139,20 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         });
 
-        private GoogleApiClient mGoogleApiClient;
-        private static final int GOOGLE_SIGN_IN_FLAG = 9001;
+        //private GoogleApiClient mGoogleApiClient;
+        //private static final int GOOGLE_SIGN_IN_FLAG = 9001;
 
         // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        // Build a GoogleApiClient with access to the Google Sign-In API and the
-        // options specified by gso.
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+//        // Build a GoogleApiClient with access to the Google Sign-In API and the
+//        // options specified by gso.
+//        mGoogleApiClient = new GoogleApiClient.Builder(this)
+//                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+//                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+//                .build();
 
     }
 
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(EmailPasswordActivity.this, R.string.auth_failed,
+                            Toast.makeText(MainActivity.this, R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w("CIS3334", "signInWithEmail:failed", task.getException());
-                            Toast.makeText(EmailPasswordActivity.this, R.string.auth_failed,
+                            Toast.makeText(MainActivity.this, R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -216,28 +216,28 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         mAuth.signOut();
     }
 
-    private void googleSignIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, GOOGLE_SIGN_IN_FLAG);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == GOOGLE_SIGN_IN_FLAG) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if (result.isSuccess()) {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = result.getSignInAccount();
-                firebaseAuthWithGoogle(account);
-            } else {
-                // Google Sign In failed, update UI appropriately
-                // ... 
-            }
-        }
-    }
+//    private void googleSignIn() {
+//        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+//        startActivityForResult(signInIntent, GOOGLE_SIGN_IN_FLAG);
+//    }
+//
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+//        if (requestCode == GOOGLE_SIGN_IN_FLAG) {
+//            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+//            if (result.isSuccess()) {
+//                // Google Sign In was successful, authenticate with Firebase
+//                GoogleSignInAccount account = result.getSignInAccount();
+//                firebaseAuthWithGoogle(account);
+//            } else {
+//                // Google Sign In failed, update UI appropriately
+//                // ...
+//            }
+//        }
+//    }
 
 
 
