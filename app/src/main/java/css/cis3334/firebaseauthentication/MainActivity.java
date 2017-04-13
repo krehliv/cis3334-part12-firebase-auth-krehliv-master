@@ -39,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    /**
+     * If the Google account connection fails, display a toast that says "fail".
+     * @param connectionResult
+     */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.w("CIS3334", "onConnectionFailed:failed");
@@ -46,12 +50,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         textViewStatus.setText("Google Account Fail");
     }
 
+    /**
+     * Start authentication.
+     */
     @Override
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
 
+    /**
+     * Stop authentication
+     */
     @Override
     public void onStop() {
         super.onStop();
@@ -60,29 +70,33 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         }
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d("CIS334", "firebaseAuthWithGoogle:" + acct.getId());
+//    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+//        Log.d("CIS334", "firebaseAuthWithGoogle:" + acct.getId());
+//
+//        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+//        mAuth.signInWithCredential(credential)
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        Log.d("CIS334", "signInWithCredential:onComplete:" + task.isSuccessful());
+//
+//                        // If sign in fails, display a message to the user. If sign in succeeds
+//                        // the auth state listener will be notified and logic to handle the
+//                        // signed in user can be handled in the listener.
+//                        if (!task.isSuccessful()) {
+//                            Log.w("CIS334", "signInWithCredential", task.getException());
+//                            Toast.makeText(MainActivity.this, "Authentication failed.",
+//                                    Toast.LENGTH_SHORT).show();
+//                        }
+//                        // ...
+//                    }
+//                });
+//    }
 
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("CIS334", "signInWithCredential:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w("CIS334", "signInWithCredential", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        // ...
-                    }
-                });
-    }
-
+    /**
+     * Set up all the button values etc.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         };
 
+        /**
+         * Grabs the text from editTextEmail and editTextPassword when the "normal login" button is clicked.
+         */
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("CIS3334", "normal login ");
@@ -118,6 +135,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         });
 
+        /**
+         * Grabs the editTextEmail and exitTextPassword text to create a new account.
+         */
         buttonCreateLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("CIS3334", "Create Account ");
@@ -132,6 +152,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 //            }
 //        });
 
+        /**
+         * Signs out the current user.
+         */
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("CIS3334", "Logging out - signOut ");
@@ -156,6 +179,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     }
 
+    /**
+     * Creates an account using the email and password strings acquired from the Create Account button action.
+     * @param email
+     * @param password
+     */
     private void createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -176,6 +204,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 });
     }
 
+    /**
+     * Signs in an existing user using email and password acquired from text fields in the UI.
+     * @param email
+     * @param password
+     */
     private void signIn(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -197,6 +230,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 });
     }
 
+    /**
+     * Sets the user's name, email, photoUrl, and firebase User ID.
+     */
     private void getCurrentUser() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -212,6 +248,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         }
     }
 
+    /**
+     * Sign out the current user.
+     */
     private void signOut () {
         mAuth.signOut();
     }
