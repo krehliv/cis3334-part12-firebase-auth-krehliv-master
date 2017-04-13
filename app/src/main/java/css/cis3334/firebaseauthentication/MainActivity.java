@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
      */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.w("CIS3334", "onConnectionFailed:failed");
-        Toast.makeText(MainActivity.this, "FAIL", Toast.LENGTH_LONG).show();
+        //Log.w("CIS3334", "onConnectionFailed:failed");
+        //Toast.makeText(MainActivity.this, "FAIL", Toast.LENGTH_LONG).show();
         textViewStatus.setText("Google Account Fail");
     }
 
@@ -114,13 +114,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
+                //if (user != null) {
                     // User is signed in
-                    Log.d("CIS3334", "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
+                    //Log.d("CIS3334", "onAuthStateChanged:signed_in:" + user.getUid());
+                //} else {
                     // User is signed out
-                    Log.d("CIS3334", "onAuthStateChanged:signed_out");
-                }
+                    //Log.d("CIS3334", "onAuthStateChanged:signed_out");
+                //}
                 // ...
             }
         };
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
          */
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("CIS3334", "normal login ");
+                //Log.d("CIS3334", "normal login ");
                 signIn(editTextEmail.getText().toString(), editTextPassword.getText().toString());
             }
         });
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
          */
         buttonCreateLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("CIS3334", "Create Account ");
+                //Log.d("CIS3334", "Create Account ");
                 createAccount(editTextEmail.getText().toString(), editTextPassword.getText().toString());
             }
         });
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
          */
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("CIS3334", "Logging out - signOut ");
+                //Log.d("CIS3334", "Logging out - signOut ");
                 signOut();
             }
         });
@@ -189,15 +189,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("CIS3334", "createUserWithEmail:onComplete:" + task.isSuccessful());
+                        //Log.d("CIS3334", "createUserWithEmail:onComplete:" + task.isSuccessful());
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "FAIL",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                        //if (!task.isSuccessful()) {
+                        //    Toast.makeText(MainActivity.this, "FAIL",
+                        //            Toast.LENGTH_SHORT).show();
+                        //}
 
                         // ...
                     }
@@ -214,16 +214,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("CIS3334", "signInWithEmail:onComplete:" + task.isSuccessful());
+                        //Log.d("CIS3334", "signInWithEmail:onComplete:" + task.isSuccessful());
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w("CIS3334", "signInWithEmail:failed", task.getException());
-                            Toast.makeText(MainActivity.this, "FAIL",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                        //if (!task.isSuccessful()) {
+                        //    Log.w("CIS3334", "signInWithEmail:failed", task.getException());
+                        //    Toast.makeText(MainActivity.this, "FAIL",
+                        //            Toast.LENGTH_SHORT).show();
+                        //}
 
                         // ...
                     }
